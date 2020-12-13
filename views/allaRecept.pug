@@ -1,0 +1,9 @@
+html
+    head
+        title= titel
+    body
+        h1= titel
+        ul
+            each recept in allaRecept
+                li
+                    a(href=recept.url) #{recept.titel}
