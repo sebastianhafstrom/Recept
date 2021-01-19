@@ -1,0 +1,26 @@
+html
+    head
+        title= titel
+        script(src='/js/nyttRecept.js').
+
+    body
+        a(href='/') Tillbaka till alla recept
+        h1= titel
+        h2 Ingredienser
+        div#ingredients
+            div#0.ingredient
+                input(type='text' name='antal' placeholder='Antal')
+                input#enhet1(type='text' name='enhet' placeholder='Enhet')
+                input#vara1(type='text' name='vara' placeholder='Vara')
+                button(onclick='removeIngredient(0)') Ta bort
+        button(onclick='addIngredient()') Lägg till ingredient
+        
+        h2 Instruktioner
+        div#instructions
+            div#0.instruction
+                input(type='text' name='instruction' placeholder='Instruktion')
+                button(onclick='removeInstruction(0)') Ta bort
+        button(onclick='addInstruction()') Lägg till instruktion
+        br
+        button(onclick='submitRecepie()') Spara recept
+        

@@ -18,7 +18,11 @@ app.get('/', function (req, res) {
     })
 })
 
-app.get('/:url', function (req, res) {
+app.get('/add-recepie', function (req, res) {
+    res.render('nyttRecept', {titel: 'Lägg till nytt recept'})
+})
+
+app.get('/recept/:url', function (req, res) {
     // console.log(req.params.url)
     db.getRecipe(req.params.url).then(results => {
         // console.log('Results: ' + results)

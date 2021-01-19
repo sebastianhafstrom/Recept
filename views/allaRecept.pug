@@ -6,4 +6,6 @@ html
         ul
             each recept in allaRecept
                 li
-                    a(href=recept.url) #{recept.titel}
+                    a(href='/recept/' + recept.url) #{recept.titel}
+        a(href='/add-recepie')
+            button Lägg till nytt recept
