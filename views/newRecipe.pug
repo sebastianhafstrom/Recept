@@ -6,12 +6,14 @@ html
     body
         a(href='/') Tillbaka till alla recept
         h1= titel
+        h2 Name på receptet
+        input#title(type='text' name='title' placeholder='Antal')
         h2 Ingredienser
         div#ingredients
             div#0.ingredient
-                input(type='text' name='antal' placeholder='Antal')
-                input#enhet1(type='text' name='enhet' placeholder='Enhet')
-                input#vara1(type='text' name='vara' placeholder='Vara')
+                input(type='text' name='amount' placeholder='Antal')
+                input#enhet1(type='text' name='unit' placeholder='Enhet')
+                input#vara1(type='text' name='product' placeholder='Vara')
                 button(onclick='removeIngredient(0)') Ta bort
         button(onclick='addIngredient()') Lägg till ingredient
         
@@ -22,5 +24,6 @@ html
                 button(onclick='removeInstruction(0)') Ta bort
         button(onclick='addInstruction()') Lägg till instruktion
         br
-        button(onclick='submitRecepie()') Spara recept
+        br
+        button(onclick='submitRecipe()') Spara recept
         

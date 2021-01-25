@@ -1,0 +1,14 @@
+html
+    head
+        title= title
+    body
+        a(href='/') Tillbaka till alla recept
+        h1= title
+        h2 Ingredienser
+        ul
+            each ingredient in ingredients
+                li #{ingredient.amount} #{ingredient.unit} #{ingredient.product}
+        h2 Instruktioner
+        ol
+            each instruction in instructions
+                li= instruction

@@ -50,30 +50,58 @@ function addInstruction() {
 
 function removeIngredient(i) {
     document.getElementById(i).remove()
-    console.log(i)
+    //console.log(i)
 }
 
 function removeInstruction(i) {
     document.getElementById(i).remove()
-    console.log(i)
+    //console.log(i)
 }
 
-function submitRecepie() {
-    const ingredients = document.querySelectorAll(".ingredient");
-    for(var i = 0; i < ingredients.length; i++) {
-        var ingredient = ingredients[i].getElementsByTagName('input')
+function submitRecipe() {
+    var ingredients = []
+    const ings = document.querySelectorAll(".ingredient");
+    for(var i = 0; i < ings.length; i++) {
+        var ingredient = ings[i].getElementsByTagName('input')
         // console.log(ingredient)
+        var temp = {
+            amount: ingredient[0].value,
+            unit: ingredient[1].value,
+            product: ingredient[2].value
+        }
+        ingredients.push(temp)
         for(var j = 0; j < ingredient.length; j++) {
             console.log(ingredient[j].value)
         }
     }
+    console.log("Alla ingredienter: " + ingredients)
 
-    const instructions = document.querySelectorAll(".instruction");
-    for(var i = 0; i < instructions.length; i++) {
-        var instruction = instructions[i].getElementsByTagName('input')
+    var instructions = []
+    const instrucs = document.querySelectorAll(".instruction");
+    for(var i = 0; i < instrucs.length; i++) {
+        var instruction = instrucs[i].getElementsByTagName('input')
         //console.log(instruction)
         for(var j = 0; j < instruction.length; j++) {
             console.log(instruction[j].value)
+            instructions.push(instruction[j].value)
         }
     }
+    console.log("Alla instruktioner: " + instructions)
+
+    var toSend = {
+        title: document.querySelector("#title").value,
+        ingredients: ingredients,
+        instructions: instructions
+    }
+    
+    fetch('http://localhost:3000/submit-recipe', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(toSend),
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }

@@ -1,4 +1,5 @@
 var express = require('express');
+const bodyParser = require('body-parser');
 var app = express();
 require('dotenv').config()
 
@@ -11,22 +12,32 @@ app.set('view engine', 'pug');
 
 app.use(express.static('public'));
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.get('/', function (req, res) {
     db.getAllRecipe().then(results => {
         // console.log('Resultat: ' + results)
-        res.render('allaRecept', {titel: 'Alla recept', allaRecept: results})
+        res.render('allRecipes', {title: 'Alla recept', allRecipes: results})
     })
 })
 
-app.get('/add-recepie', function (req, res) {
-    res.render('nyttRecept', {titel: 'Lägg till nytt recept'})
+app.get('/add-recipe', function (req, res) {
+    res.render('newRecipe', {titel: 'Lägg till nytt recept'})
 })
 
-app.get('/recept/:url', function (req, res) {
+app.post('/submit-recipe', function (req, res) {
+    console.log("Skickat recept")
+    console.log(req.body)
+    db.submitRecipe(req.body)
+    res.sendStatus(200)
+})
+
+app.get('/recipe/:url', function (req, res) {
     // console.log(req.params.url)
     db.getRecipe(req.params.url).then(results => {
         // console.log('Results: ' + results)
-        res.render('recept', {titel: results.titel, ingredienser: results.ingredienser, instruktioner: results.instruktioner})
+        res.render('recipe', {title: results.title, ingredients: results.ingredients, instructions: results.instructions})
     })
 })
 
