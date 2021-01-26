@@ -1,0 +1,32 @@
+html
+    head
+        title= titel
+        script(src='/js/editRecipe.js').
+
+    body
+        //a(href='/') Tillbaka till alla recept
+        h2 Namn på receptet
+        input#title(type='text' name='title' value=title)
+        h2 Ingredienser
+        div#ingredients
+            each ing, index in ingredients
+                div(id='ing-'+index class="ingredient")
+                    input(type='text' name='amount' value=ing.amount)
+                    input(type='text' name='unit' value=ing.unit)
+                    input(type='text' name='product' value=ing.product)
+                    button(onclick='removeIngredient(ing-' + index + ')') Ta bort
+        button(onclick='addIngredient()') Lägg till ingredient
+        
+        h2 Instruktioner
+        div#instructions
+            each ins, index in instructions
+                div(id='ins-'+index class='instruction')
+                    input(type='text' name='instruction' value=ins)
+                    button(onclick='removeInstruction(ins-' + index + ')') Ta bort
+        button(onclick='addInstruction()') Lägg till instruktion
+        br
+        br
+        a(href='/recipe/' + url)
+            button Avbryt
+        button(onclick='submitRecipe("' + id + '")') Spara recept
+        

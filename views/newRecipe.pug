@@ -1,27 +1,27 @@
 html
     head
-        title= titel
-        script(src='/js/nyttRecept.js').
+        title= title
+        script(src='/js/newRecipe.js').
 
     body
         a(href='/') Tillbaka till alla recept
-        h1= titel
-        h2 Name på receptet
+        h1= title
+        h2 Namn på receptet
         input#title(type='text' name='title' placeholder='Antal')
         h2 Ingredienser
         div#ingredients
-            div#0.ingredient
+            div#ing0.ingredient
                 input(type='text' name='amount' placeholder='Antal')
-                input#enhet1(type='text' name='unit' placeholder='Enhet')
-                input#vara1(type='text' name='product' placeholder='Vara')
-                button(onclick='removeIngredient(0)') Ta bort
+                input(type='text' name='unit' placeholder='Enhet')
+                input(type='text' name='product' placeholder='Vara')
+                button(onclick='removeIngredient(ing0)') Ta bort
         button(onclick='addIngredient()') Lägg till ingredient
         
         h2 Instruktioner
         div#instructions
-            div#0.instruction
+            div#ins0.instruction
                 input(type='text' name='instruction' placeholder='Instruktion')
-                button(onclick='removeInstruction(0)') Ta bort
+                button(onclick='removeInstruction(ins0)') Ta bort
         button(onclick='addInstruction()') Lägg till instruktion
         br
         br

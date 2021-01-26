@@ -1,4 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
 require('dotenv').config();
 const uri = "mongodb+srv://" + process.env.DB_USERNAME + ":" + process.env.DB_PASSWORD + "@cluster0.gypbn.mongodb.net/test?retryWrites=true&w=majority";
 
@@ -33,8 +34,20 @@ function submitRecipe(newRecipe) {
 
 }
 
+function updateRecipe(id, newRecipe) {
+    var url = newRecipe.title.toLowerCase().replace(/ /g, "-").replace(/ö/g, "o").replace(/ä/g, "a").replace(/å/g, "a")
+    newRecipe.url = url
+    id = ObjectId(id)
+    console.log('i db.js: ')
+    console.log(newRecipe)
+    recipe.updateOne({'_id': id}, {$set: newRecipe})
+    
+
+}
+
 module.exports = {
     getRecipe,
     getAllRecipe,
-    submitRecipe
+    submitRecipe,
+    updateRecipe
 }

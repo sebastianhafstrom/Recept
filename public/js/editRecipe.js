@@ -1,7 +1,5 @@
-console.log("Hello")
-
 function addIngredient() {
-    var id = Math.random()
+    var id = Math.floor(Math.random() * Math.floor(1e6))
     var antal = document.createElement('input')
     antal.setAttribute('type', 'text') 
     antal.setAttribute('name', 'antal')
@@ -15,11 +13,11 @@ function addIngredient() {
     vara.setAttribute('name', 'vara')
     vara.setAttribute('placeholder', 'Vara')
     var removeButton = document.createElement('button')
-    removeButton.setAttribute('onclick', 'removeIngredient(' + id + ')')
+    removeButton.setAttribute('onclick', 'removeIngredient(ing' + id + ')')
     removeButton.innerText = 'Ta bort'
     var div = document.createElement('div')
     div.setAttribute('class', 'ingredient')
-    div.setAttribute('id', id)
+    div.setAttribute('id', 'ing'+id)
     div.appendChild(antal)
     div.appendChild(enhet)
     div.appendChild(vara)
@@ -31,17 +29,17 @@ function addIngredient() {
 }
 
 function addInstruction() {
-    var id = Math.random()
+    var id = Math.floor(Math.random() * Math.floor(1e6))
     var instruction = document.createElement('input')
     instruction.setAttribute('type', 'text') 
     instruction.setAttribute('name', 'instruction')
     instruction.setAttribute('placeholder', 'Instruktion')
     var removeButton = document.createElement('button')
-    removeButton.setAttribute('onclick', 'removeInstruction(' + id + ')')
+    removeButton.setAttribute('onclick', 'removeInstruction(ins' + id + ')')
     removeButton.innerText = 'Ta bort'
     var div = document.createElement('div')
     div.setAttribute('class', 'instruction')
-    div.setAttribute('id', id)
+    div.setAttribute('id', 'ins' + id)
     div.appendChild(instruction)
     div.appendChild(removeButton)
     document.getElementById('instructions').appendChild(div)
@@ -49,16 +47,17 @@ function addInstruction() {
 }
 
 function removeIngredient(i) {
-    document.getElementById(i).remove()
-    //console.log(i)
+    console.log(i)
+    i.remove()
 }
 
 function removeInstruction(i) {
-    document.getElementById(i).remove()
-    //console.log(i)
+    console.log(i)
+    i.remove()
 }
 
-function submitRecipe() {
+function submitRecipe(id) {
+    console.log("Here")
     var ingredients = []
     const ings = document.querySelectorAll(".ingredient");
     for(var i = 0; i < ings.length; i++) {
@@ -89,12 +88,13 @@ function submitRecipe() {
     console.log("Alla instruktioner: " + instructions)
 
     var toSend = {
+        _id: id,
         title: document.querySelector("#title").value,
         ingredients: ingredients,
         instructions: instructions
     }
     
-    fetch('http://localhost:3000/submit-recipe', {
+    fetch('http://localhost:3000/update-recipe', {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
