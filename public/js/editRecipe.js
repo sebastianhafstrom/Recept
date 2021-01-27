@@ -56,7 +56,7 @@ function removeInstruction(i) {
     i.remove()
 }
 
-function submitRecipe(id) {
+function submitRecipe(id, url) {
     console.log("Here")
     var ingredients = []
     const ings = document.querySelectorAll(".ingredient");
@@ -100,6 +100,12 @@ function submitRecipe(id) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(toSend),
+    })
+    .then( (response) => {
+        if (response.status == 200) {
+            window.location.href = 'http://localhost:3000'
+            console.log("Redirecting...")
+        }
     })
     .catch((error) => {
         console.error('Error:', error);
