@@ -23,9 +23,6 @@ function addIngredient() {
     div.appendChild(vara)
     div.appendChild(removeButton)
     document.getElementById('ingredients').appendChild(div)
-
-
-
 }
 
 function addInstruction() {
@@ -43,59 +40,56 @@ function addInstruction() {
     div.appendChild(instruction)
     div.appendChild(removeButton)
     document.getElementById('instructions').appendChild(div)
-
 }
 
 function removeIngredient(i) {
-    console.log(i)
     i.remove()
 }
 
 function removeInstruction(i) {
-    console.log(i)
     i.remove()
 }
 
 function submitRecipe(id, url) {
-    console.log("Here")
+    if(document.querySelector("#title").value == ""){
+        alert("The title is empty")
+        return
+    }
     var ingredients = []
     const ings = document.querySelectorAll(".ingredient");
     for(var i = 0; i < ings.length; i++) {
         var ingredient = ings[i].getElementsByTagName('input')
-        // console.log(ingredient)
+        if(ingredient[0].value = "" | ingredient[1].value == "" | ingredient[2].value == ""){
+            alert("There is an empty ingredient-input")
+            return
+        }
         var temp = {
             amount: ingredient[0].value,
             unit: ingredient[1].value,
             product: ingredient[2].value
         }
         ingredients.push(temp)
-        for(var j = 0; j < ingredient.length; j++) {
-            console.log(ingredient[j].value)
-        }
     }
-    console.log("Alla ingredienter: " + ingredients)
-
     var instructions = []
     const instrucs = document.querySelectorAll(".instruction");
     for(var i = 0; i < instrucs.length; i++) {
         var instruction = instrucs[i].getElementsByTagName('input')
-        //console.log(instruction)
         for(var j = 0; j < instruction.length; j++) {
-            console.log(instruction[j].value)
+            if(instruction[j].value == ""){
+                alert("There is an empty instruction-input")
+                return
+            }
             instructions.push(instruction[j].value)
         }
     }
-    console.log("Alla instruktioner: " + instructions)
-
     var toSend = {
         _id: id,
         title: document.querySelector("#title").value,
         ingredients: ingredients,
         instructions: instructions
     }
-    
-    fetch('http://localhost:3000/update-recipe', {
-        method: 'POST', // or 'PUT'
+    fetch(url + '/update-recipe', {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -103,7 +97,7 @@ function submitRecipe(id, url) {
     })
     .then( (response) => {
         if (response.status == 200) {
-            window.location.href = 'http://localhost:3000'
+            window.location.href = url
             console.log("Redirecting...")
         }
     })

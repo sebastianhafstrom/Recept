@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: grid;
+    height: 100vh;
+
+    grid-template-rows: auto auto 1fr auto auto auto;
+    gap: 5px;
+}
+
+@media (min-width: 720px) {
+    .container {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: auto auto 1fr auto;
+    }
+}
+
+@media (min-width: 720px) {
+
+    /* The header section takes 12 columns */
+    .header {
+        grid-column: 1 / span 12;
+    }
+
+    /* The navigation section also takes 12 columns*/
+    .navigation {
+        grid-column: 1 / span 12;
+    }
+
+    /* The main section takes 10 columns start from column 3*/
+    .main {
+        grid-column: 3 / span 10;
+    }
+
+    /* The sidebar takes 2 columns start from column 1*/
+    .sidebar {
+        grid-column: 1 / span 2;
+        grid-row: 3;
+    }
+
+    /* The ads section takes 2 columns start from column 1*/
+    .ads {
+        grid-column: 1 / span 12;
+    }
+
+    /* The footer section takes 10 columns start from column 3*/
+    .footer {
+        grid-column: 1 / span 12;
+    }
+}
+
+@media (min-width: 1020px) {
+
+    /* The navigation takes 8 columns starting from column 3*/
+    .navigation {
+      grid-column: 3 / span 8;
+    }
+  
+    /* The main section takes 8 columns starting from column 3*/
+    .main {
+      grid-column: 3 / span 8;
+    }
+  
+    /* The sidebar starts from row 2 and ends at row 4*/
+    .sidebar {
+      grid-row: 2 / 4
+    }
+  
+    /* The ads section takes 2 columns starting from column 11
+    / it also takes 2 rows starting from row 2 and ending at row 4*/
+    .ads {
+      grid-column: 11 / span 2;
+      grid-row: 2 / 4;
+    }
+  
+    /* The footer section takes 12 columns start from column 1*/
+    .footer {
+      grid-column: 1 / span 12;
+    }
+  }

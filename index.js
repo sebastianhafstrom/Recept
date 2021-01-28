@@ -17,46 +17,49 @@ app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
     db.getAllRecipe().then(results => {
-        // console.log('Resultat: ' + results)
         res.render('allRecipes', {title: 'Alla recept', allRecipes: results})
     })
 })
 
 app.get('/add-recipe', function (req, res) {
-    res.render('newRecipe', {title: 'Lägg till nytt recept'})
+    res.render('newRecipe', {backendUrl: process.env.URL, title: 'Lägg till nytt recept'})
 })
 
 app.post('/submit-recipe', function (req, res) {
     console.log("Skickat recept")
     console.log(req.body)
-    db.submitRecipe(req.body)
-    res.sendStatus(200)
+    db.submitRecipe(req.body).then(results => {
+        res.sendStatus(200) 
+    })
 })
 
 app.post('/update-recipe', function (req, res) {
-    console.log("Uppdaterat recept")
-    console.log(req.body)
     var newData = {
         title: req.body.title,
         ingredients: req.body.ingredients,
         instructions: req.body.instructions,
     }
-    db.updateRecipe(req.body._id, newData)
-    res.sendStatus(200)
+    db.updateRecipe(req.body._id, newData).then(results => {
+        res.sendStatus(200) 
+    })
 })
 
 app.get('/recipe/:url', function (req, res) {
-    // console.log(req.params.url)
     db.getRecipe(req.params.url).then(results => {
-        // console.log('Results: ' + results)
-        res.render('recipe', {title: results.title, ingredients: results.ingredients, instructions: results.instructions, url: results.url})
+        res.render('recipe', {backendUrl: process.env.URL, id: results._id.toString(), title: results.title, ingredients: results.ingredients, instructions: results.instructions, url: results.url})
+    })
+})
+
+app.delete('/recipe/:url', function (req, res) {
+    db.deleteRecipe(req.params.url).then(results => {
+        res.sendStatus(200) 
     })
 })
 
 app.get('/recipe/:url/edit', function (req, res){
     db.getRecipe(req.params.url).then(results => {
         console.log(results)
-        res.render('editRecipe', {id: results._id.toString(), title: results.title, ingredients: results.ingredients, instructions: results.instructions, url: results.url})
+        res.render('editRecipe', {backendUrl: process.env.URL, id: results._id.toString(), title: results.title, ingredients: results.ingredients, instructions: results.instructions, url: results.url})
     })
 })
 

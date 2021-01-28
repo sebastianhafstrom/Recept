@@ -1,11 +1,24 @@
 html
     head
         title= title
+        link(rel='stylesheet', href='/css/main.css')
     body
-        h1= title
-        ul
-            each recipe in allRecipes
-                li
-                    a(href='/recipe/' + recipe.url) #{recipe.title}
-        a(href='/add-recipe')
-            button Lägg till nytt recept
+        div.container
+            div.header(style='background-color: #eeeeee;')
+                p Header
+            div.navigation(style='background-color: #eeeeff;')
+                p Navigation
+            div.main(style='background-color: #eeeedd;')
+                h1= title
+                ul
+                    each recipe in allRecipes
+                        li
+                            a(href='/recipe/' + recipe.url) #{recipe.title}
+                a(href='/add-recipe')
+                    button Lägg till nytt recept
+            div.sidebar(style='background-color: #cceecc;')
+                p Sidebar
+            div.ads(style='background-color: #aaeebb;')
+                p Ads
+            div.footer(style='background-color: #eeeeaa;')
+                p Footer

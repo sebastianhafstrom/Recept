@@ -2,28 +2,41 @@ html
     head
         title= title
         script(src='/js/newRecipe.js').
+        link(rel='stylesheet', href='/css/main.css')
 
     body
-        a(href='/') Tillbaka till alla recept
-        h1= title
-        h2 Namn på receptet
-        input#title(type='text' name='title' placeholder='Antal')
-        h2 Ingredienser
-        div#ingredients
-            div#ing0.ingredient
-                input(type='text' name='amount' placeholder='Antal')
-                input(type='text' name='unit' placeholder='Enhet')
-                input(type='text' name='product' placeholder='Vara')
-                button(onclick='removeIngredient(ing0)') Ta bort
-        button(onclick='addIngredient()') Lägg till ingredient
-        
-        h2 Instruktioner
-        div#instructions
-            div#ins0.instruction
-                input(type='text' name='instruction' placeholder='Instruktion')
-                button(onclick='removeInstruction(ins0)') Ta bort
-        button(onclick='addInstruction()') Lägg till instruktion
-        br
-        br
-        button(onclick='submitRecipe()') Spara recept
+        div.container
+            div.header(style='background-color: #eeeeee;')
+                p Header
+            div.navigation(style='background-color: #eeeeff;')
+                p Navigation
+            div.main(style='background-color: #eeeedd;')
+                a(href='/') Tillbaka till alla recept
+                h1= title
+                h2 Namn på receptet
+                input#title(type='text' name='title' placeholder='Antal')
+                h2 Ingredienser
+                div#ingredients
+                    div#ing0.ingredient
+                        input(type='text' name='amount' placeholder='Antal')
+                        input(type='text' name='unit' placeholder='Enhet')
+                        input(type='text' name='product' placeholder='Vara')
+                        button(onclick='removeIngredient(ing0)') Ta bort
+                button(onclick='addIngredient()') Lägg till ingrediens
+                
+                h2 Instruktioner
+                div#instructions
+                    div#ins0.instruction
+                        input(type='text' name='instruction' placeholder='Instruktion')
+                        button(onclick='removeInstruction(ins0)') Ta bort
+                button(onclick='addInstruction()') Lägg till instruktion
+                br
+                br
+                button(onclick='submitRecipe("' + backendUrl +'")') Spara recept
+            div.sidebar(style='background-color: #cceecc;')
+                p Sidebar
+            div.ads(style='background-color: #aaeebb;')
+                p Ads
+            div.footer(style='background-color: #eeeeaa;')
+                p Footer
         

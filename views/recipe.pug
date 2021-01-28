@@ -1,18 +1,33 @@
 html
     head
         title= title
+        link(rel='stylesheet', href='/css/main.css')
+        script(src='/js/recipe.js').
     body
-        a(href='/') Tillbaka till alla recept
-        h1= title
-        h2 Ingredienser
-        ul
-            each ingredient in ingredients
-                li #{ingredient.amount} #{ingredient.unit} #{ingredient.product}
-        h2 Instruktioner
-        ol
-            each instruction in instructions
-                li= instruction
-        br
-        br
-        a(href='/recipe/' + url + '/edit')
-            button Ändra recept
+        div.container
+            div.header(style='background-color: #eeeeee;')
+                p Header
+            div.navigation(style='background-color: #eeeeff;')
+                p Navigation
+            div.main(style='background-color: #eeeedd;')
+                a(href='/') Tillbaka till alla recept
+                h1= title
+                h2 Ingredienser
+                ul
+                    each ingredient in ingredients
+                        li #{ingredient.amount} #{ingredient.unit} #{ingredient.product}
+                h2 Instruktioner
+                ol
+                    each instruction in instructions
+                        li= instruction
+                br
+                br
+                a(href='/recipe/' + url + '/edit')
+                    button Ändra recept
+                button(onclick='deleteRecipe("' + id + '", "' + backendUrl +'")') Ta bort
+            div.sidebar(style='background-color: #cceecc;')
+                p Sidebar
+            div.ads(style='background-color: #aaeebb;')
+                p Ads
+            div.footer(style='background-color: #eeeeaa;')
+                p Footer

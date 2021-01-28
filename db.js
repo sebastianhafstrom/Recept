@@ -30,8 +30,8 @@ function submitRecipe(newRecipe) {
     var url = newRecipe.title.toLowerCase().replace(/ /g, "-").replace(/ö/g, "o").replace(/ä/g, "a").replace(/å/g, "a")
     newRecipe.url = url
     console.log(newRecipe)
-    recipe.insertOne(newRecipe)
-
+    let doc = recipe.insertOne(newRecipe)
+    return doc
 }
 
 function updateRecipe(id, newRecipe) {
@@ -40,14 +40,19 @@ function updateRecipe(id, newRecipe) {
     id = ObjectId(id)
     console.log('i db.js: ')
     console.log(newRecipe)
-    recipe.updateOne({'_id': id}, {$set: newRecipe})
-    
+    let doc = recipe.updateOne({'_id': id}, {$set: newRecipe})
+    return doc
+}
 
+function deleteRecipe(id) {
+    let doc = recipe.deleteOne({'_id': ObjectId(id)})
+    return doc
 }
 
 module.exports = {
     getRecipe,
     getAllRecipe,
     submitRecipe,
-    updateRecipe
+    updateRecipe,
+    deleteRecipe
 }
