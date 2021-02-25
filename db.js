@@ -38,8 +38,6 @@ function updateRecipe(id, newRecipe) {
     var url = newRecipe.title.toLowerCase().replace(/ /g, "-").replace(/ö/g, "o").replace(/ä/g, "a").replace(/å/g, "a")
     newRecipe.url = url
     id = ObjectId(id)
-    console.log('i db.js: ')
-    console.log(newRecipe)
     let doc = recipe.updateOne({'_id': id}, {$set: newRecipe})
     return doc
 }
